@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<eclipse-userlibraries version="2">
+    <library name="ssh" systemlibrary="false">
+        <archive path="C:/Jars/ssh-addon-1.0.jar"/>
+        <archive path="C:/Jars/ganymed-ssh2-261.jar"/>
+    </library>
+</eclipse-userlibraries>

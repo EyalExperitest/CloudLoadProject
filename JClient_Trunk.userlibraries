@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<eclipse-userlibraries version="2">
+    <library name="JClient_Trunk" systemlibrary="false">
+        <archive javadoc="jar:file:/C:/Program%20Files%20(x86)/Experitest/SeeTest_Trunk/clients/java/imageClient_doc.zip!/" path="C:/Program Files (x86)/Experitest/SeeTest_Trunk/clients/java/imageClient.jar"/>
+        <archive path="C:/Program Files (x86)/Experitest/SeeTest_Trunk/clients/java/junit-4.4.jar"/>
+        <archive path="C:/Program Files (x86)/Experitest/SeeTest_Trunk/clients/java/mobile-webdriver.jar"/>
+        <archive path="C:/Program Files (x86)/Experitest/SeeTest_Trunk/clients/java/selenium-api-2.42.2.jar"/>
+        <archive path="C:/Program Files (x86)/Experitest/SeeTest_Trunk/clients/java/selenium-support-2.44.0.jar"/>
+        <archive path="C:/Program Files (x86)/Experitest/SeeTest_Trunk/clients/java/ws-commons-util-1.0.2.jar"/>
+        <archive path="C:/Program Files (x86)/Experitest/SeeTest_Trunk/clients/java/xmlrpc-client-3.1.2.jar"/>
+        <archive path="C:/Program Files (x86)/Experitest/SeeTest_Trunk/clients/java/xmlrpc-common-3.1.2.jar"/>
+    </library>
+</eclipse-userlibraries>
