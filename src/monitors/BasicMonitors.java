@@ -24,10 +24,10 @@ public class BasicMonitors {
 		System.out.println("Memory Usage : "+result);
 		double cpuUsage = getCpuUsage(processName);
 		System.out.println("CPU Usage : "+cpuUsage);
-		
-		
-		
-		
+
+
+
+
 
 	}
 
@@ -71,20 +71,24 @@ public class BasicMonitors {
 
 		BufferedReader stdout = new BufferedReader(new InputStreamReader(
 				process.getInputStream()));
-
-		while (process.isAlive() && processLine==null){
+		Integer  memoryUsage=new Integer(0);
+		while (process.isAlive() /*&& processLine==null*/){
 			currentLine = stdout.readLine();
 			if (currentLine!=null){	
 				if (currentLine.contains(processName)){
 					processLine=currentLine;
+					if (processLine!=null){
+						String[] words =processLine.split(" +");
+						
+						Integer parseInt = Integer.parseInt(words[4].replaceAll(",", ""));
+						//System.out.println("parseInt = "+parseInt);
+						memoryUsage =memoryUsage+parseInt;	
+						//System.out.println("memoryUsage = "+memoryUsage);
+
+					}
 
 				}
 			}
-		}
-		int memoryUsage=0;
-		if (processLine!=null){
-			String[] words =processLine.split(" +");
-			memoryUsage =Integer.parseInt(words[4].replaceAll(",", ""));	
 		}
 
 		int result = memoryUsage;

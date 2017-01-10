@@ -1,6 +1,8 @@
 package monitors;
 
 import java.io.IOException;
+import java.net.Inet4Address;
+import java.net.UnknownHostException;
 
 import utils.CSV;
 import utils.GetDate;
@@ -21,10 +23,17 @@ public class ProcessMonitor implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-
+		String thisIP = "";
+		try {
+			thisIP = Inet4Address.getLocalHost().getHostAddress().replace("192.168", "").replace(".", "_");
+		} catch (UnknownHostException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		String date = GetDate.getDate();
 		String dateCleaned=date.replaceAll("[^0-9]+", "_");
-		String fileName=path+this.processName+"_"+dateCleaned;
+		
+		String fileName=path+this.processName+thisIP+dateCleaned;
 		String dateHeader = "Date ";
 		String memoryHeader = processName +" memory";
 		String cpuHeader = processName +" CPU";

@@ -10,6 +10,12 @@ import java.util.Properties;
 
 public class STproperties {
 
+	static private String cloudIP="192.168.1.210";
+	static private 	int cloudPort = 80;
+	static private 	String cloudUser = "eyal";
+	static private 	String encPassword = "2F7A6F3176536C663675306E6556312F31514D7455673D3D";
+
+
 	public STproperties() {
 		// TODO Auto-generated constructor stub
 	}
@@ -26,10 +32,7 @@ public class STproperties {
 	public static void readySeeTest() throws IOException {
 		Properties prop = new Properties();
 
-		String cloudIP = "192.168.1.210";
-		int cloudPort = 80;
-		String cloudUser = "eyal";
-		String encPassword = "2F7A6F3176536C663675306E6556312F31514D7455673D3D";
+		//String cloudIP = "192.168.1.210";
 		
 		
 		//String appdatapath = "C:\\Users\\eyal.neumann\\AppData\\Roaming";
@@ -75,8 +78,8 @@ public class STproperties {
 				prop.setProperty("first.launch", "false");
 				prop.setProperty("suspend.floating.dialog", "true");
 
-				prop.setProperty("cloudserver.available.list", cloudIP+":"+cloudPort);
-				prop.setProperty("cloudserver.list", cloudIP+":"+cloudPort+":"+cloudUser+":"+encPassword+":true:false:");
+				prop.setProperty("cloudserver.available.list", getCloudIP()+":"+getCloudPort());
+				prop.setProperty("cloudserver.list", getCloudIP()+":"+getCloudPort()+":"+getCloudUser()+":"+encPassword+":true:false:");
 				prop.setProperty("block.cloud.server.access", "false");
 				
 		
@@ -89,6 +92,30 @@ public class STproperties {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	private static String getCloudUser() {
+		return cloudUser;
+	}
+
+	public static void setCloudUser(String cloudUser) {
+		STproperties.cloudUser = cloudUser;
+	}
+
+	private static int getCloudPort() {
+		return cloudPort;
+	}
+
+	public static void setCloudPort(int cloudPort) {
+		STproperties.cloudPort = cloudPort;
+	}
+
+	private static String getCloudIP() {
+		return cloudIP;
+	}
+
+	public static void setCloudIP(String cloudIP) {
+		STproperties.cloudIP = cloudIP;
 	}
 
 
