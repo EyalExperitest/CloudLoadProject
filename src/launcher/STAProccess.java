@@ -102,7 +102,8 @@ public class STAProccess extends Process {
 		// TODO Auto-generated method stub
 		return STAProccess.process.waitFor();
 	}
-
+	
+	@Deprecated
 	public void reset() throws IOException, InterruptedException{
 		lastLog = LogHandeler.findLatestLogFile(logDirStr);
 		LogHandeler.clearFile(lastLog);
@@ -152,7 +153,11 @@ public class STAProccess extends Process {
 
 	}
 
-
+	/**
+	 * Stopes Cloud Agent, requires proper authorization
+	 * @throws IOException
+	 * @throws InterruptedException
+	 */
 	public static void stopCloudAgent() throws IOException, InterruptedException {
 		Process stopping =Runtime.getRuntime().exec("net stop ecaservice");
 		System.out.println("Stoping Cloud Agent started");
@@ -164,6 +169,7 @@ public class STAProccess extends Process {
 	 * @return
 	 * @throws IOException
 	 */
+	@Deprecated
 	public  int getMemoryUsage() throws IOException {
 		String command = "powershell TASKLIST | findstr studio.exe";
 		Process process =Runtime.getRuntime().exec(command);
