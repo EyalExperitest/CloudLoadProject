@@ -38,9 +38,9 @@ public class MultipleMachineTest {
 	private String remotePassword = "ExperiQA2027";
 	private String srcPath = "c:\\myjars\\";
 	private String dstPath = "myjars\\";
-	private String jarRemoteFolderPath = "C:\\myjars\\";
+//	private String jarRemoteFolderPath = "C:\\myjars\\";
 	private String jarName = "InstallLaunchRunMonitor4.jar";
-	private TransferAndRun[] downloadInstallAndRun ;
+	private TransferAndRun[] transferAndRun ;
 	private FlagObserver[] flagObservers;
 	private Thread[] launcherThreads;
 	private Thread[] observerThreads;
@@ -84,7 +84,7 @@ public class MultipleMachineTest {
 
 
 
-		downloadInstallAndRun =new TransferAndRun[NUMBER_OF_REMOTE_MACHINES];
+		transferAndRun =new TransferAndRun[NUMBER_OF_REMOTE_MACHINES];
 		launcherThreads =new Thread[NUMBER_OF_REMOTE_MACHINES];
 		flagObservers =new FlagObserver[NUMBER_OF_REMOTE_MACHINES];
 		observerThreads =new Thread[NUMBER_OF_REMOTE_MACHINES];
@@ -92,8 +92,8 @@ public class MultipleMachineTest {
 
 
 		for (int i=0;i<NUMBER_OF_REMOTE_MACHINES;i++){
-			downloadInstallAndRun[i]=new TransferAndRun(remoteAddresses[i], remoteUsers[i], remotePassword, srcPath, dstPath, jarRemoteFolderPath, jarName);
-			launcherThreads[i]=new Thread(downloadInstallAndRun[i]);
+			transferAndRun[i]=new TransferAndRun(remoteAddresses[i], remoteUsers[i], remotePassword, srcPath, dstPath, jarName);
+			launcherThreads[i]=new Thread(transferAndRun[i]);
 		//	String filepath=dstPath+"FinishFlag";
 			flagObservers[i] = new FlagObserver(remoteAddresses[i], remoteUsers[i], remotePassword, dstPath, "FinishFlag");
 			observerThreads[i] =new Thread(flagObservers[i]);

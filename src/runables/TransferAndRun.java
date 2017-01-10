@@ -17,14 +17,13 @@ public class TransferAndRun implements Runnable {
 
 	boolean visableUI = true;
 
-	public TransferAndRun(String remoteAddress,String remoteUser,String remotePassword,String srcPath,String dstPath,
-			String jarRemoteFolderPath,String jarName) {
+	public TransferAndRun(String remoteAddress,String remoteUser,String remotePassword,String srcPath,String dstPath,String jarName) {
 		this.remoteAddress=remoteAddress;
 		this.remoteUser=remoteUser;
 		this.remotePassword=remotePassword;
 		this.srcPath=srcPath;
 		this.dstPath=dstPath;
-		this.jarRemoteFolderPath=jarRemoteFolderPath;
+		//this.jarRemoteFolderPath=jarRemoteFolderPath;
 		this.jarName=jarName;
 		// TODO Auto-generated constructor stub
 
