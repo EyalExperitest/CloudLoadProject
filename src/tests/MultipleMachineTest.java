@@ -2,15 +2,13 @@ package tests;
 
 import java.io.IOException;
 
-import javax.swing.JOptionPane;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import monitors.MacCloudMonitor;
-import runables.DownloadInstallAndRun;
 import runables.FlagObserver;
+import runables.TransferAndRun;
 
 public class MultipleMachineTest {
 	private static final int NUMBER_OF_REMOTE_MACHINES = 4;
@@ -42,8 +40,7 @@ public class MultipleMachineTest {
 	private String dstPath = "myjars\\";
 	private String jarRemoteFolderPath = "C:\\myjars\\";
 	private String jarName = "InstallLaunchRunMonitor4.jar";
-	private String installationFile = "SeeTest_windows_10_3_3026_debug.exe";
-	private DownloadInstallAndRun[] downloadInstallAndRun ;
+	private TransferAndRun[] downloadInstallAndRun ;
 	private FlagObserver[] flagObservers;
 	private Thread[] launcherThreads;
 	private Thread[] observerThreads;
@@ -87,7 +84,7 @@ public class MultipleMachineTest {
 
 
 
-		downloadInstallAndRun =new DownloadInstallAndRun[NUMBER_OF_REMOTE_MACHINES];
+		downloadInstallAndRun =new TransferAndRun[NUMBER_OF_REMOTE_MACHINES];
 		launcherThreads =new Thread[NUMBER_OF_REMOTE_MACHINES];
 		flagObservers =new FlagObserver[NUMBER_OF_REMOTE_MACHINES];
 		observerThreads =new Thread[NUMBER_OF_REMOTE_MACHINES];
@@ -95,7 +92,7 @@ public class MultipleMachineTest {
 
 
 		for (int i=0;i<NUMBER_OF_REMOTE_MACHINES;i++){
-			downloadInstallAndRun[i]=new DownloadInstallAndRun(remoteAddresses[i], remoteUsers[i], remotePassword, srcPath, dstPath, jarRemoteFolderPath, jarName, installationFile, visableUI);
+			downloadInstallAndRun[i]=new TransferAndRun(remoteAddresses[i], remoteUsers[i], remotePassword, srcPath, dstPath, jarRemoteFolderPath, jarName);
 			launcherThreads[i]=new Thread(downloadInstallAndRun[i]);
 		//	String filepath=dstPath+"FinishFlag";
 			flagObservers[i] = new FlagObserver(remoteAddresses[i], remoteUsers[i], remotePassword, dstPath, "FinishFlag");
