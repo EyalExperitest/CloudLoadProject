@@ -5,8 +5,6 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import utils.RunCmd;
-
 public class RemoteFolder implements Closeable {
 	private String address;
 	private String user;

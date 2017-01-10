@@ -42,6 +42,7 @@ public class BasicMonitors {
 		String line1;
 
 		BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
+		@SuppressWarnings("unused")
 		String readLine = stdout.readLine();
 		//System.out.println(readLine);
 		readLine = stdout.readLine();

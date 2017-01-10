@@ -2,7 +2,6 @@ package runables;
 
 import java.io.IOException;
 
-import remote.RemoteInstaller;
 import remote.RemoteRobocopy;
 import remote.RomoteJarLauncher;
 
@@ -15,8 +14,6 @@ public class DownloadInstallAndRun implements Runnable {
 	private String dstPath = "myjars\\";
 	private String jarRemoteFolderPath = "C:\\myjars\\";
 	private String jarName = "EribankAndroidTest13.jar";
-	private String installationFile = "SeeTest_windows_10_3_3026_debug.exe";
-
 	boolean visableUI = true;
 
 	public DownloadInstallAndRun(String remoteAddress,String remoteUser,String remotePassword,String srcPath,String dstPath,
@@ -28,8 +25,6 @@ public class DownloadInstallAndRun implements Runnable {
 		this.dstPath=dstPath;
 		this.jarRemoteFolderPath=jarRemoteFolderPath;
 		this.jarName=jarName;
-		this.installationFile=installationFile;
-		// TODO Auto-generated constructor stub
 
 
 
