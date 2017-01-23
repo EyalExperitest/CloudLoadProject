@@ -14,9 +14,9 @@ public class RomoteJarLauncher {
 		String jarName = "InstallLaunchRun.jar";
 		boolean visableUI = true;
 		boolean waitForFinish =false;
-		
-		
-		remoteJarLaunch(remoteAddress, remoteUser, remotePassword, jarRemoteFolderPath, jarName, visableUI,waitForFinish);
+
+		/*add arg[0] because should be called with the user serial number*/
+		remoteJarLaunch(remoteAddress, remoteUser, remotePassword, jarRemoteFolderPath, jarName, visableUI,waitForFinish, args[0]);
 	}
 
 
@@ -31,8 +31,9 @@ public class RomoteJarLauncher {
 	 * @throws IOException
 	 * @throws InterruptedException
 	 */
+
 	public static void remoteJarLaunch(String remoteAddress, String remoteUser, String remotePassword,
-			String jarRemoteFolderPath, String jarName, boolean visableUI, boolean waitForFinish) throws IOException, InterruptedException {
+			String jarRemoteFolderPath, String jarName, boolean visableUI, boolean waitForFinish, String userNumber) throws IOException, InterruptedException {
 		String jarPath = jarRemoteFolderPath+jarName;
 		String iFlag = visableUI?" -i ":"";
 		String dFlag = waitForFinish ?"":" -d ";
@@ -44,7 +45,8 @@ public class RomoteJarLauncher {
 						 +" -p " +remotePassword
 						 +dFlag
 						 +" java -jar "
-						 +"\""+jarPath +"\"" ;
+						 +"\""+jarPath + "\" "
+						 + userNumber ;
 		String name = "Running jar "+jarName+" on "+remoteAddress;
 		RunCmd.runCMD(name,command);
 	}
@@ -59,5 +61,7 @@ public class RomoteJarLauncher {
 		
 		
 	}
-
+	public static void remoteJarLaunch(String remoteAddress, String remoteUser, String remotePassword, String jarRemoteFolderPath, String jarName, boolean visableUI, boolean waitForFinish) throws IOException, InterruptedException {
+		remoteJarLaunch(remoteAddress,remoteUser,remotePassword,jarRemoteFolderPath,jarName,visableUI,waitForFinish,"");
+	}
 }

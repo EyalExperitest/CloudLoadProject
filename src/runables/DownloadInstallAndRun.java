@@ -1,3 +1,4 @@
+/*
 package runables;
 
 import java.io.IOException;
@@ -14,7 +15,7 @@ public class DownloadInstallAndRun implements Runnable {
 	private String dstPath = "myjars\\";
 	private String jarRemoteFolderPath = "C:\\myjars\\";
 	private String jarName = "EribankAndroidTest13.jar";
-	boolean visableUI = true;
+	private boolean visableUI = true;
 
 	public DownloadInstallAndRun(String remoteAddress,String remoteUser,String remotePassword,String srcPath,String dstPath,
 			String jarRemoteFolderPath,String jarName,String installationFile ,boolean visableUI) {
@@ -41,6 +42,9 @@ public class DownloadInstallAndRun implements Runnable {
 			System.out.println("*************Launching jar on remote machine*************");
 			RomoteJarLauncher.remoteJarLaunch(remoteAddress, remoteUser, remotePassword, jarRemoteFolderPath, jarName, visableUI,false);
 		} catch (InterruptedException | IOException e) {
+			*/
+/* this we exclude this class from the rpoject*//*
+
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -57,3 +61,4 @@ public class DownloadInstallAndRun implements Runnable {
 	}
 
 }
+*/

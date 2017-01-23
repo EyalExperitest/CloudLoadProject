@@ -24,9 +24,7 @@ public class InstallLaunchRunMonitor2 {
 
 	/**
 	 * @throws IOException 
-	 * @throws FileNotFoundException 
-	 * @throws MalformedURLException 
-	 * @throws InterruptedException 
+	 * @throws InterruptedException
 	 * 
 	 */
 	//private static final String APP_NAME = "com.experitest.ExperiBank/.LoginActivity";
@@ -101,7 +99,8 @@ public class InstallLaunchRunMonitor2 {
 			System.out.println("***********Launch************");
 			STproperties.setCloudIP("192.168.2.11");
 			STproperties.setCloudPort(1080);
-			STproperties.setCloudUser("admin");
+			/* username number is recived from the jar execution comman*/
+			STproperties.setCloudUser("user"+args[0]);
 
 			STproperties.readySeeTest();
 			process= new STAProccess(false);
@@ -150,7 +149,7 @@ public class InstallLaunchRunMonitor2 {
 	}
 
 	/**
-	 * @param client1
+	 * @param client
 	 */
 	public static void doEriBankPayAndroid(Client client) {
 

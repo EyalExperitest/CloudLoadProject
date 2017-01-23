@@ -86,7 +86,7 @@ public class MultipleMachineTest {
 
 
 		for (int i=0;i<NUMBER_OF_REMOTE_MACHINES;i++){
-			transferAndRun[i]=new TransferAndRun(remoteAddresses[i], remoteUsers[i], remotePassword, srcPath, dstPath, jarName);
+			transferAndRun[i]=new TransferAndRun(remoteAddresses[i], remoteUsers[i], remotePassword, srcPath, dstPath, jarName, (i+1));
 			launcherThreads[i]=new Thread(transferAndRun[i]);
 			//	String filepath=dstPath+"FinishFlag";
 			flagObservers[i] = new FlagObserver(remoteAddresses[i], remoteUsers[i], remotePassword, dstPath, "FinishFlag");

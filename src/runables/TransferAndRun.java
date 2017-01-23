@@ -14,10 +14,11 @@ public class TransferAndRun implements Runnable {
 	private String dstPath = "myjars\\";
 	private String jarRemoteFolderPath = "C:\\myjars\\";
 	private String jarName = "EribankAndroidTest13.jar";
+	private String userNumber;
 
 	boolean visableUI = true;
 
-	public TransferAndRun(String remoteAddress,String remoteUser,String remotePassword,String srcPath,String dstPath,String jarName) {
+	public TransferAndRun(String remoteAddress,String remoteUser,String remotePassword,String srcPath,String dstPath,String jarName,int userNumber) {
 		this.remoteAddress=remoteAddress;
 		this.remoteUser=remoteUser;
 		this.remotePassword=remotePassword;
@@ -25,6 +26,7 @@ public class TransferAndRun implements Runnable {
 		this.dstPath=dstPath;
 		//this.jarRemoteFolderPath=jarRemoteFolderPath;
 		this.jarName=jarName;
+		this.userNumber=Integer.toString(userNumber);
 		// TODO Auto-generated constructor stub
 
 
@@ -40,7 +42,7 @@ public class TransferAndRun implements Runnable {
 			System.out.println("*************Copying jar to remote machine*************");
 			RemoteRobocopy.remoteCopy(remoteAddress, remoteUser, remotePassword, srcPath, dstPath);
 			System.out.println("*************Launching jar on remote machine*************");
-			RomoteJarLauncher.remoteJarLaunch(remoteAddress, remoteUser, remotePassword, jarRemoteFolderPath, jarName, visableUI,false);
+			RomoteJarLauncher.remoteJarLaunch(remoteAddress, remoteUser, remotePassword, jarRemoteFolderPath, jarName, visableUI,false,userNumber);
 		} catch (InterruptedException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
