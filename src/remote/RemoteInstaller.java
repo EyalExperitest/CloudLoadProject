@@ -1,6 +1,5 @@
 package remote;
 
-import java.io.File;
 import java.io.IOException;
 
 import utils.RunCmd;

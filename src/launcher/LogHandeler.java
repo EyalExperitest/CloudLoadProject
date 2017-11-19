@@ -7,7 +7,7 @@ import java.util.TreeSet;
 
 public class LogHandeler {
 
-	private static final String LOG_HEAD = "SeeTest-2016";
+	private static final String LOG_HEAD = "SeeTest-20";
 
 	public LogHandeler() {
 		// TODO Auto-generated constructor stub

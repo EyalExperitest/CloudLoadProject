@@ -5,13 +5,8 @@ package sandbox;
  * This program will demonstrate how to exec 'sudo' on the remote.
  *
  */
-import com.jcraft.jsch.*;
 
 import ssh.SSHUtils;
-
-import java.awt.*;
-import javax.swing.*;
-import java.io.*;
 
 public class Sudo{
 	public static void main(String[] arg){
