@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import com.experitest.client.Client;
 
+import basictests.devicetester.DeviceTest;
 import launcher.STAProccess;
 import launcher.STproperties;
 import monitors.ProcessMonitor;
@@ -18,7 +19,9 @@ import utils.RunCmd;
  * @author eyal.neumann
  *
  */
-public class InstallLaunchRunMonitor2 {
+public class InstallLaunchRunMonitor3 {
+
+	private static final int DEVICES_PER_USER = 2;
 
 	private static final String SHAERD_FOLDER = "C:\\myjars\\";
 
@@ -38,7 +41,7 @@ public class InstallLaunchRunMonitor2 {
 	private static long t0;
 	private static long t1;
 
-	public InstallLaunchRunMonitor2()  {
+	public InstallLaunchRunMonitor3()  {
 		// TODO Auto-generated constructor stub
 
 	}
@@ -55,7 +58,7 @@ public class InstallLaunchRunMonitor2 {
 		try {
 			if (installFlag) {
 				System.out.println("Downloading Latest master version");
-				String url = "http://192.168.1.213:8090/guestAuth/repository/download/bt2/.lastSuccessful/SeeTest_windows_10_4_%7Bbuild.number%7D.exe";
+				String url = "http://192.168.1.213:8090/guestAuth/repository/download/bt2/.lastSuccessful/SeeTest_windows_11_4_%7Bbuild.number%7D.exe";
 				String file = System.getenv("Temp") + "\\SeeTest_windows.exe";
 				Download.downolad(url, file);
 				STAProccess.closeSeeTest();
@@ -101,6 +104,7 @@ public class InstallLaunchRunMonitor2 {
 			STproperties.setCloudPort(443);
 			/* username number is recived from the jar execution comman*/
 			STproperties.setCloudUser("user"+args[0]);
+			STproperties.setDeviceNumber(DEVICES_PER_USER);
 
 			STproperties.readySeeTest();
 			process= new STAProccess(false);
@@ -119,9 +123,37 @@ public class InstallLaunchRunMonitor2 {
 			processMonitor.setPath(SHAERD_FOLDER);
 			thread =new Thread(processMonitor);
 			thread.start();
-			//****************************************
-			client =new Client(host, port, true);
-			doEriBankPayAndroid(client);
+			
+			
+			//**********Starting Tests *******
+			
+			
+			DeviceTest[] deviceTests =new DeviceTest[DEVICES_PER_USER];
+			Thread[] testThreads = new Thread[DEVICES_PER_USER];
+			
+			for (int i=0;i<deviceTests.length;i++){
+				String query=(i%3==0)?"@os='ios' and @remote='true'":(i%3==1)?"@os='android' and @remote='true'":"";
+				deviceTests[i]=new DeviceTest(new Client(host, port, true),query);
+				testThreads[i]=new Thread(deviceTests[i]);
+				testThreads[i].setName("Thread "+query.replaceAll("and @remote='true'","").replaceAll("@os=", "").replaceAll("'","")+" "+i);
+				testThreads[i].start();
+				
+			}
+			
+			for (int i=0;i<deviceTests.length;i++){
+				testThreads[i].join();
+			}
+
+			
+			
+			
+			
+			
+			
+			
+			
+			
+
 
 
 			//*************Stopping Monitor Thread ******* 
@@ -144,88 +176,9 @@ public class InstallLaunchRunMonitor2 {
 		flagFile.createNewFile();
 		
 		
-		
 
 	}
 
-	/**
-	 * @param client
-	 */
-	public static void doEriBankPayAndroid(Client client) {
 
-		client.setProjectBaseDirectory(projectBaseDirectory);
-		client.setReporter("xml", "reports", "AndroidEriBankTest");
-
-
-		long seconds;
-		long minutes;
-		try {
-			String deviceName = client.waitForDevice("@os='android' ", 300000);
-			client.openDevice();
-
-
-			client.deviceAction("Unlock");
-
-			try {
-
-				client.launch(APP_NAME, true, true);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				client.applicationClose(APP_NAME);
-				client.uninstall(APP_NAME);
-				client.install(APP_NAME, true, true);
-				client.launch(APP_NAME, true, true);
-			}
-
-
-
-			client.waitForElement("NATIVE", "text=Login", 0, 10000);
-			client.elementSendText("NATIVE", "hint=Username", 0, "company");
-			client.elementSendText("NATIVE", "hint=Password", 0, "ENCRYPT:3272454672327251412F5A4F792F2F67704667592F513D3D");
-			client.click("NATIVE", "text=Login", 0, 1);
-
-			client.waitForElement("NATIVE", "text=Make Payment", 0, 10000);
-			client.click("NATIVE", "text=Make Payment", 0, 1);
-
-			client.waitForElement("NATIVE",  "hint=Phone", 0, 10000);
-			client.elementSendText("NATIVE", "hint=Phone", 0, "0983427896");
-			client.elementSendText("NATIVE", "hint=Name", 0, "Eyal");
-			client.elementSendText("NATIVE", "hint=Amount", 0, "100");
-			client.click("NATIVE", "text=Select", 0, 1);
-			client.elementListSelect("", "text=Mexico", 0, true);
-
-			client.waitForElement("NATIVE", "id=sendPaymentButton", 0, 10000);
-			client.click("NATIVE", "id=sendPaymentButton", 0, 1);
-
-			client.waitForElement("NATIVE", "text=Yes", 0, 10000);
-			client.click("NATIVE", "text=Yes", 0, 1);
-
-			client.waitForElement("NATIVE", "text=Logout", 0, 10000);
-			client.click("NATIVE", "text=Logout", 0, 1);
-
-			client.closeDevice();
-			client.releaseDevice(deviceName, true, true, true);
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-
-			e.printStackTrace();
-			client.report(e.toString(), false);
-		}
-		t1=System.currentTimeMillis();
-		long totalMils=t1-t0;
-		long totalSeconds =totalMils/1000;
-		seconds = totalSeconds%60;
-		minutes = totalSeconds/60;
-
-		client.report("The time running is : "+ minutes+" Minutes and "+seconds+" Seconds", true);
-
-		String reportPath =client.generateReport(false)+"\\index.html";
-		OpenHTML.openHTML(reportPath);
-
-		// Releases the client so that other clients can approach the agent in the near future. 
-		client.releaseClient();
-	}
 
 }
