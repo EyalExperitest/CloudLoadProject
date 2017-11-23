@@ -14,6 +14,7 @@ public class STproperties {
 	static private 	String cloudUser 	 = "eyal";
 	static private 	String encPassword	 = "2F7A6F3176536C663675306E6556312F31514D7455673D3D";
 	static private 	String licenseServer = "192.168.1.205" ;
+	static private int deviceNumbers=1;
 
 
 	public STproperties() {
@@ -79,9 +80,14 @@ public class STproperties {
 				prop.setProperty("suspend.floating.dialog", "true");
 
 				prop.setProperty("cloudserver.available.list", getCloudIP()+":"+getCloudPort());
-				prop.setProperty("cloudserver.list", getCloudIP()+":"+getCloudPort()+":"+getCloudUser()+":"+encPassword+":true:false:");
+				prop.setProperty("cloudserver.list", getCloudIP()+":"+getCloudPort()+":"+getCloudUser()+":"+encPassword+":true:true::false");
 				prop.setProperty("block.cloud.server.access", "false");
 
+				for(int i=2;i<STproperties.getDeviceNumber()+1;i++){
+					prop.setProperty("floating.defaults."+i, "ANDROID,IPHONE,");
+
+				}
+				
 
 
 				prop.store(output,null);
@@ -124,6 +130,14 @@ public class STproperties {
 
 	public static void setLicenseServer(String licenseServer) {
 		STproperties.licenseServer = licenseServer;
+	}
+
+	public static int getDeviceNumber() {
+		return deviceNumbers;
+	}
+
+	public static void setDeviceNumber(int deviceNumbers) {
+		STproperties.deviceNumbers = deviceNumbers;
 	}
 
 
